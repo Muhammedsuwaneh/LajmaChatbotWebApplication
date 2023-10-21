@@ -13,12 +13,14 @@ namespace Lajma.Backend.Services
         private static ApplicationDbContext? context { get; set; }
         private static IConfiguration? config { get; set; }
         private static IMapper mapper;
+        private EmailService emailService;
 
         public ApplicationUserService(ApplicationDbContext _context, IConfiguration _config, IMapper _mapper)
         {
             context = _context;
             config = _config;
             mapper = _mapper;
+            emailService = new EmailService();
         }
 
         public ApiResponse<ApplicationUserDto> UserAuthenticationService(ApplicationUserAuthDto userAuth)
@@ -73,7 +75,8 @@ namespace Lajma.Backend.Services
                 context.Add(appUser);
                 context.SaveChanges();
 
-                var token = Encrypt.GenerateSessionToken(appUser, config);
+                var token = Encrypt.GenerateSessionToken(appUser, config); // get token
+                emailService.SendEmail(user.Email, user.Username); // send email
 
                 return new ApiResponse<ApplicationUserDto>
                 {

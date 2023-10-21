@@ -95,22 +95,27 @@ export default function Login({ onFormChange }: LoginPageProps) {
                     />
                 </FormControl>
                 </motion.div>
-                <motion.div className="item" variants={item}>
-                    <Link href="/resetpassword" underline="none" sx={{ padding: ".3rem", textAlign: "right"}}>
-                        Forgot password 
-                    </Link>
-                </motion.div>
+                <Box sx={{ padding: ".3rem", display: "flex", justifyContent: "space-between"}}>
+                    <motion.div className="item" variants={item}>
+                        <Typography>Forgot password ? </Typography>
+                    </motion.div>
+                    <motion.div className="item" variants={item}>
+                        <Link href="/resetpassword" underline="none">
+                            Reset 
+                        </Link>
+                    </motion.div>
+                </Box>
                 <motion.div className="item" variants={item}>
                 <Button variant="outlined" sx={{ margin: "1rem 0" , width: "100%"}} type="submit" disabled={authContext.sendingRequest}>
                     {authContext.sendingRequest ? LoadingContent : "Login"}
                 </Button>
                 </motion.div>
-                </form>
                 <motion.div className="item" variants={item}>
                 <Typography sx={{ padding: "1rem 2rem"}}>
-                    New to Laj&apos;ma ?  <Button variant="text" onClick={() => onFormChange("register")}>Sign up</Button>
+                    Don&apos;t have account ?  <Button variant="text" onClick={() => onFormChange("register")}>Sign up</Button>
                 </Typography>
                 </motion.div>
+                </form>
             </motion.div>
     );
 }
