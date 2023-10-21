@@ -1,0 +1,14 @@
+.chat__history::-webkit-scrollbar {
+    display: none;
+}
+
+.chat__history::-webkit-scrollbar-track {
+    border-radius: none;
+    background-color: none;
+    border: none;
+}
+
+.chat__history::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: none;
+}

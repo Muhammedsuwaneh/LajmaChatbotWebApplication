@@ -1,0 +1,14 @@
+.response_list::-webkit-scrollbar {
+    display: none;
+}
+
+.response_list::-webkit-scrollbar-track {
+    border-radius: none;
+    background-color: none;
+    border: none;
+}
+
+.response_list::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: none;
+}
