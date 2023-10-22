@@ -8,7 +8,6 @@ interface ErrorPageProps {
 };
 
 export default function ErrorPage({ error, reset }: ErrorPageProps) {
-    console.log("error - " + error.message)
     return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", margin: "auto" }}>
         <Typography sx={{ padding: ".7rem", fontSize: "1.5rem"}}>Server Error 🥲</Typography>

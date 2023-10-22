@@ -10,7 +10,7 @@ export default function Logo() {
   
   return (
     <Box>
-      <a href="/user/chat">
+      <a href="/">
         {(themeContext.appThemeMode == "light") ? 
         <Image
           src="/LightModeLogo.png"

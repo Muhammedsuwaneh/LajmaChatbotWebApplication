@@ -118,7 +118,7 @@ export default function Register({ onFormChange }: RegisterPageProps) {
                 </motion.div>
             </form>
             <motion.div className="item" variants={item}>
-            <Typography sx={{ padding: "1rem 2rem"}}>
+            <Typography sx={{ padding: ".5rem 2rem"}}>
                 Already have an account ?  <Button variant="text" onClick={() => onFormChange("register")}>Sign in</Button>
             </Typography>
             </motion.div>

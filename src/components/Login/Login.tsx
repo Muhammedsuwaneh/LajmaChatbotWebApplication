@@ -101,7 +101,7 @@ export default function Login({ onFormChange }: LoginPageProps) {
                     </motion.div>
                     <motion.div className="item" variants={item}>
                         <Link href="/resetpassword" underline="none">
-                            Reset 
+                            Reset Password
                         </Link>
                     </motion.div>
                 </Box>
