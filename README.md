@@ -69,8 +69,6 @@ This will create all necessary database tables using the initial migrations in t
 
 ![Screenshot](screenshots/auth.png)
 
-![Screenshot](screenshots/register.png)
-
 ![Screenshot](screenshots/main.png)
 
 ![Screenshot](screenshots/chat.png)
