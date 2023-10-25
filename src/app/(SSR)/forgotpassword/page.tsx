@@ -1,5 +1,5 @@
 import React from 'react';
-import ResetPasswordRequestForm from '@/UI/ResetPasswordRequestForm/ResetPasswordRequestForm';
+import ForgotPasswordRequestForm from '@/UI/ForgotPasswordRequestForm/ForgotPasswordRequestForm';
 import { getUserAuthenticationToken } from '../user/chat/page';
 import { redirect } from 'next/navigation';
 
@@ -11,7 +11,7 @@ export default async function page() {
 
   return (
     <>
-      <ResetPasswordRequestForm />
+      <ForgotPasswordRequestForm />
     </>
   )
 }

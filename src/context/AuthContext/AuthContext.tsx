@@ -3,7 +3,7 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import emailValidator from "email-validator";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { setCookie, deleteCookie } from "cookies-next";
 
 const { v4: uuidv4 } = require('uuid');
@@ -13,6 +13,7 @@ interface IAuthContext {
     responseStatus: string | null,
     responseMessage: string | null,
     isOpen: boolean,
+    forgotpasswordHandler: (email: string) => Promise<void>,
     logoutRequest: (cookie_name: string) => void,
     sendUserRegisterationRequest: (username: string, email: string, password: string, avatar: string) => Promise<void>,
     sendUserAuthenticationRequest: (email: string, password: string) => Promise<void>
@@ -23,6 +24,7 @@ const AuthContext = createContext<IAuthContext>({
     responseStatus: null,
     responseMessage: null,
     isOpen: false,
+    forgotpasswordHandler: async () => {},
     logoutRequest: () => {},
     sendUserRegisterationRequest: async () => {},
     sendUserAuthenticationRequest: async () => {},
@@ -73,7 +75,37 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
         setSendingRequest(false);
         successFeedback("Logged out");
         deleteCookie(cookie_name);
-        router.push("/");
+        redirect("/");
+    };
+
+    const forgotpasswordHandler = async (email: string) => {
+        setSendingRequest(true);
+         // validate email
+        const emailIsValid = emailValidator.validate(email);
+
+        if(emailIsValid) {           
+            const url = process.env.NEXT_PUBLIC_FORGOT_PASSWORD_URL;
+            const options = getOptions();
+            if(url) {
+                axios.post(`${url}/${email}`, options)
+                    .then(res => {
+                        successFeedback("Password reset link sent. Please check your email");
+                        setSendingRequest(false);
+                        redirect("/");
+                    })
+                    .catch(error => {
+                        if(error.code == "ERR_NETWORK") errorFeedback("Check your connection and try again");
+                        else {
+                            const { message } = error.response.data;
+                            errorFeedback('oops something went wrong 😢. ' + message);
+                        }
+                     });
+            }
+            else errorFeedback("oops ! could not retrieve password reset link 🥲");
+        }
+        else {
+            errorFeedback("please enter a valid email");
+        }
     };
 
     const userRegisterationRequestHandler = async (username: string, email: string, password: string, avatar: string): Promise<void> => {
@@ -154,6 +186,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
                 responseMessage: responseMessage,
                 logoutRequest: logoutRequest,
                 isOpen: isOpen,
+                forgotpasswordHandler: forgotpasswordHandler,
                 sendUserAuthenticationRequest: userAuthenticationRequestHandler,
                 sendUserRegisterationRequest: userRegisterationRequestHandler
             }}>

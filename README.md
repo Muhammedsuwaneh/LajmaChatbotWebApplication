@@ -1,13 +1,13 @@
-## Lajma OpenAI Chatbot Web Application
+## [Lajma]("https://lajma.vercel.app/") OpenAI Chatbot Web Application
 
 ## About Project
 
-ChatGPT inspired user chatbot web application. Users can send queries or prompts and get response(s) from the chatbot. The chatbot utilizes OpenAI's API and GPT-3.5 Turbo Model.
-[explore application]("")
+ChatGPT inspired user chatbot web application. Users can send queries or prompts and get a response(s) from the chatbot. The chatbot utilizes OpenAI's API and GPT-3.5 Turbo Model.
+[explore application]("https://lajma.vercel.app/")
 
 ## Prerequisites
 
-The client runs using npm and the api uses nuget packages. Api packages are already present in the
+The client runs using npm and the API uses Nuget packages. Api packages are already present in the
 repository therefore no installation is required. However, some packages might be out-of-date and will need some update
 
 To run the project follow the instructions below
@@ -29,8 +29,8 @@ npm run dev
 ## Run Server [API]
 
 1. Open Visual Studio
-2. Open The Package manager console
-3. Change connection string to your localhost server
+2. Open The Package Manager console
+3. Change the connection string to your localhost server
 4. Apply migrations to your database using the command below.
 
 ```bash
@@ -41,7 +41,7 @@ This will create all necessary database tables using the initial migrations in t
 
 5. Now build and run the solution. Your server should be up and running
             
-## Technologies utilised
+## Technologies utilized
 
 <div id="badges">
   <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="50px" height="50px"/>
@@ -65,13 +65,21 @@ This will create all necessary database tables using the initial migrations in t
 
 ## User Interface
 
-### Sign in & Sign Up page
-
-Users can log onto/ sign up using these forms
+### UI
 
 ![Screenshot](screenshots/auth.png)
 
 ![Screenshot](screenshots/register.png)
+
+![Screenshot](screenshots/main.png)
+
+![Screenshot](screenshots/chat.png)
+
+![Screenshot](screenshots/window.png)
+
+![Screenshot](screenshots/voice.png)
+
+![Screenshot](screenshots/account.png)
 
 ## License 
 
@@ -79,7 +87,3 @@ This project is licensed under [`MIT`](LICENSE)
 
 ## Version 
 1.0.0
-
-### Site
-
-

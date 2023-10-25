@@ -5,6 +5,8 @@ using Lajma.Backend.Dtos;
 using Lajma.Backend.Encryption;
 using Lajma.Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 
 namespace Lajma.Backend.Services
 {
@@ -76,7 +78,13 @@ namespace Lajma.Backend.Services
                 context.SaveChanges();
 
                 var token = Encrypt.GenerateSessionToken(appUser, config); // get token
-                emailService.SendEmail(user.Email, user.Username); // send email
+
+                string body = $"Dear {user.Username},\n 😊 We are excited to welcome you to Laj'ma 🤖, the innovative chatbot application inspired by " +
+                $"the groundbreaking technology developed by OpenAI. We're thrilled that you've chosen to join our community of users" +
+                $" who appreciate the power of conversational AI. With Laj'ma, you'll experience the future of intelligent, interactive communication.";
+                string subject = "Subject: Welcome to Laj'ma - Chatbot Inspired by OpenAI!";
+
+                emailService.SendEmail(user.Email, user.Username, body, subject); // send email
 
                 return new ApiResponse<ApplicationUserDto>
                 {
@@ -198,6 +206,7 @@ namespace Lajma.Backend.Services
                 user.Email = updatedUser.Email;
                 user.Avatar = updatedUser.Avatar;
                 user.Password = Encrypt.GenerateMD5HashedPassword(updatedUser.Password);
+                context.ApplicationUsers.Update(user);
                 context?.SaveChangesAsync();
 
                 return new ApiResponse<ApplicationUserDto>
@@ -211,6 +220,77 @@ namespace Lajma.Backend.Services
             } catch(Exception ex)
             {
                 return new ApiResponse<ApplicationUserDto>
+                {
+                    ResponseObject = null,
+                    message = "oops something went wrong: " + ex.Message,
+                    token = null,
+                    status = 500
+                };
+            }
+        }
+
+        public ApiResponse<string> ForgotPassword(string email)
+        {
+            try
+            {
+                // get user
+                var user = context.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                if (user == null) return new ApiResponse<string> { ResponseObject = null, message = "user not found", token = null, status = 400 };
+
+                var token = Encrypt.GenerateSessionToken(user, config); // get token;
+
+                // send reset link to user's email
+                string resetLink = $"http://localhost:3000/reset/{token}"; 
+                string subject = "Subject: Password reset request";
+                string body = $"A request has been made to reset your password. Please follow this link to reset password.\n\nPassword reset link: {resetLink}";
+
+                emailService.SendEmail(user.Email, user.Username, body, subject); // send email
+
+                return new ApiResponse<string>
+                {
+                    ResponseObject = token,
+                    message = "token generated",
+                    token = null,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new ApiResponse<string>
+                {
+                    ResponseObject = null,
+                    message = "oops something went wrong: " + ex.Message,
+                    token = null,
+                    status = 500
+                };
+            }
+        }
+
+        public ApiResponse<string> ResetPassword(int id, string newPassword)
+        {
+            try
+            {
+                var user = context.ApplicationUsers.FirstOrDefault(u => u.Id == id); // check if user exist
+                if (user == null) return new ApiResponse<string> { ResponseObject = null, message = "user not found", token = null, status = 400 };
+
+                user.Password = Encrypt.GenerateMD5HashedPassword(newPassword); // update password
+                context.ApplicationUsers.Update(user);
+                context.SaveChanges();
+
+                return new ApiResponse<string>
+                {
+                    ResponseObject = "",
+                    message = "password reset was successful",
+                    token = null,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new ApiResponse<string>
                 {
                     ResponseObject = null,
                     message = "oops something went wrong: " + ex.Message,

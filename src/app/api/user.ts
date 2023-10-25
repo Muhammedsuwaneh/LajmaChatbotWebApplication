@@ -67,3 +67,23 @@ export const updateUserInfoRequest = async (token: string, userInfo: IUserInfo):
   }
   else return null;
 };
+
+
+export const resetPasswordHandler = async (token: string, password: string): Promise<boolean> => {
+  const url = process.env.NEXT_PUBLIC_RESET_PASSWORD_URL;
+
+  if (url) {
+      const userInfo = { password: password };
+      const options = getOptions(token);
+      try {
+        const response = await axios.put(url, userInfo, options);
+        const { status } = response.data;
+        if(status == 200) return true;
+        return false;
+      }
+      catch(error) {
+        return false;
+      };
+  }
+  else return false;
+};

@@ -97,6 +97,7 @@ namespace Lajma.Backend.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("delete_query_history/{queryId}")]
         public IActionResult DeleteQueryHistory(string queryId)
         {

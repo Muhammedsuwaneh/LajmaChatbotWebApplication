@@ -110,7 +110,7 @@ export default function UpdateForm({ user }: {user: IUserInfo}) {
                 open={state["right"]}
                 onClose={() => toggleDrawer("right", false)}
             >
-               <Box sx={{ padding: "1rem", height: "100vh", background: (themeContext.appThemeMode == "light") ? "#fff" : "#100337" }}>
+               <Box sx={{ padding: "1rem", minHeight: "120vh", background: (themeContext.appThemeMode == "light") ? "#fff" : "#100337" }}>
                     <Typography sx={{ color: (themeContext.appThemeMode == "light") ? "#000" : "#fff"}}>Select Avatar</Typography>
                     <Divider />
                     <Avatars onAvatarSelected={setAvatarHandler} numberOfItems={20} />
@@ -118,7 +118,7 @@ export default function UpdateForm({ user }: {user: IUserInfo}) {
                     sx={{ borderRadius: ".5rem", color: "#fff", background: "#22B3E0"}}>Confirm</Button>
                </Box>
             </Drawer>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: "flex", flexDirection: "column",  padding: "1rem" }}>
                 <Box sx={{ position: "relative", display: "flex", alignItems: "center", margin: "auto" }}>
                     <motion.div className="item" variants={item}>
                     <Avatar alt={avatar} src={avatar} sx={{ alignSelf: "center", color: "#C9C9C9", width: '6rem', height: '6rem', margin: ".3rem 0", position: "relative" }}>
@@ -131,9 +131,9 @@ export default function UpdateForm({ user }: {user: IUserInfo}) {
                    </motion.div>
                 </Box>
                 <form onSubmit={(event) => userInfoUpdateHandler(event)}>
-                    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem", marginTop: "2rem" }}>
+                    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
                         <motion.div className="item" variants={item}>
-                            <FormControl sx={{ margin: "1rem 0", width: '30ch',
+                            <FormControl sx={{ margin: "1rem", width: '30ch',
                                 color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }} 
                                 variant="standard" required>
                             <InputLabel htmlFor="standard-adornment-email" 
@@ -153,7 +153,7 @@ export default function UpdateForm({ user }: {user: IUserInfo}) {
                             </FormControl>
                         </motion.div>
                         <motion.div className="item" variants={item}>
-                            <FormControl sx={{ margin: "1rem 0", width: '30ch', color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }} 
+                            <FormControl sx={{ margin: "1rem", width: '30ch', color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }} 
                             variant="standard" required>
                             <InputLabel htmlFor="standard-adornment-email" 
                                 sx={{ color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }}>Email</InputLabel>
@@ -172,7 +172,7 @@ export default function UpdateForm({ user }: {user: IUserInfo}) {
                             </FormControl>
                         </motion.div>
                         <motion.div className="item" variants={item}>
-                            <FormControl sx={{  margin: "1rem 0", width: '30ch', color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }} 
+                            <FormControl sx={{  margin: "1rem", width: '30ch', color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }} 
                             variant="standard" required>
                                 <InputLabel htmlFor="outlined-adornment-password" 
                                 sx={{ color: (themeContext.appThemeMode == "light") ? "#000" : "#fff" }}>Password</InputLabel>

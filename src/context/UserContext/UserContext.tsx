@@ -23,6 +23,7 @@ interface IUserContext {
     responseMessage: string | null,
     user: IUserInfo | null,
     isOpen: boolean,
+    resetPasswordHandler: (token: string, password: string) => Promise<void>,
     updateUserRequest: (token: string, updatedUser: IUserInfo) => Promise<void>,
     deleteUserRequest: (token: string) => Promise<void>,
 }
@@ -33,6 +34,7 @@ const UserContext = createContext<IUserContext>({
     responseMessage: null,
     user: null,
     isOpen: false,
+    resetPasswordHandler: async () => {},
     updateUserRequest: async () => {},
     deleteUserRequest: async () => {},
 });
@@ -80,6 +82,31 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         setIsOpen(true);
         setResponseMessage(message);
     };
+
+    const resetPasswordHandler = async (token: string, password: string) => {
+        
+        setSendingRequest(true);
+
+        const url = process.env.NEXT_PUBLIC_RESET_PASSWORD_URL;
+        const options = getOptions(token);
+        if(url) {
+            axios.put(url, { password: password }, options)
+                .then(res => {
+                    successFeedback("password reset was successfully");
+                    redirect("/");
+                })
+                .catch(error => {
+                    if(error.code == "ERR_NETWORK") errorFeedback("Check your connection and try again");
+                    else {
+                        errorFeedback('oops something went wrong 😢. ' + error);  
+                    }
+
+                    console.log(error)
+                 });
+        }
+        else errorFeedback("oops ! something went wrong 🥲");
+};
+
 
     const deleteUserRequestHandler = async (token: string): Promise<void> => {     
         setSendingRequest(true);
@@ -160,6 +187,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
                 responseMessage: responseMessage,
                 user: user,
                 isOpen: isOpen,
+                resetPasswordHandler: resetPasswordHandler,
                 updateUserRequest: updateUserRequestHandler,
                 deleteUserRequest: deleteUserRequestHandler
             }}>

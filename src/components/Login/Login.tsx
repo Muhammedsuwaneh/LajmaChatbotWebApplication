@@ -100,7 +100,7 @@ export default function Login({ onFormChange }: LoginPageProps) {
                         <Typography>Forgot password ? </Typography>
                     </motion.div>
                     <motion.div className="item" variants={item}>
-                        <Link href="/resetpassword" underline="none">
+                        <Link href="/forgotpassword" underline="none">
                             Reset Password
                         </Link>
                     </motion.div>

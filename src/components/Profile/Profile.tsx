@@ -86,17 +86,16 @@ export default function Profile({ user }: Props) {
         </Fade>
       </Modal>
       {userContext.isOpen && <Toast status={userContext.responseStatus} message={userContext.responseMessage} /> } 
-      <Box sx={{ margin: 'auto', width: { lg: "60%", md: '70%', sm: "100%", xs: "100%", minHeight: "60vh", 
-      padding: "2rem 0" }}}>
+      <Box sx={{ margin: 'auto', width: { lg: "60%", md: '70%', sm: "100%", xs: "100%" }, minHeight: "100vh", 
+      padding: { lg: ".5rem 0", md: "2rem 0", sm: "1rem 0", xs: "1rem 0" }}}>
       <motion.div
         className="container"
         variants={container}
         initial="hidden"
         animate="visible">
-          <Box sx={{ background: (themeContext.appThemeMode == "light") ? "#fff" : "#041F34", 
-          padding: "2rem 0", margin: "1rem 0", borderRadius: ".5rem", display: "flex", 
+          <Box sx={{ background: (themeContext.appThemeMode == "light") ? "#fff" : "#041F34", margin: "1rem 0", borderRadius: ".5rem", display: "flex", 
           boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19)",
-          flexDirection: 'column', justifyContent: "center", alignItems: "center"}}>
+          flexDirection: 'column', justifyContent: "center", alignItems: "center", padding: "1rem"}}>
                 <UpdateForm user={user} />
           </Box>
         </motion.div>
