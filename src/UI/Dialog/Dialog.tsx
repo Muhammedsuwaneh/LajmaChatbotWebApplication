@@ -1,6 +1,6 @@
 'use client';
 import { useContext, ChangeEvent, useRef } from 'react';
-import { Drawer, LinearProgress, Box, Typography, Avatar, Divider } from "@mui/material";
+import { Drawer, LinearProgress, Box, Typography, Stack, Avatar, Divider } from "@mui/material";
 import Response from '../Response/Response';
 import QueryContext from '@/context/QueryContext/QueryContext';
 import SendIcon from '@mui/icons-material/Send';
@@ -110,7 +110,7 @@ export default function Dialog() {
             </Box>
           }
       </Drawer>
-      <Box sx={{ position:"relative", minHeight:'100vh' }}>
+      <Stack sx={{ display: "flex", flexDirection: "column" }}>
        {queryContext.isOpen && <Toast status={queryContext.responseStatus} message={queryContext.responseMessage} />}
         {queryContext.sendingRequest && <Box sx={{ padding: "1rem" }}>
           <PageLoaderSpinner width={30} height={30} /> 
@@ -118,8 +118,7 @@ export default function Dialog() {
         <Response />
         <Box sx={{  display: "flex", alignItems: "center", justifyContent: 'center', flexDirection: "column", 
         margin: { lg: '.5rem', sm: '0', md: '0', xs: '0'} , padding: ".5rem 1rem",
-        background: (themeContext.appThemeMode == "light") ? "#fff" : "#03001C", width: { lg: "70%", md: "95%", xs: "95%", sm: "95%" },
-        position: 'fixed', top: { lg: '88vh', sm: '89vh', xs: '89vh', md: '87vh' }, zIndex: '100' }}>
+        background: (themeContext.appThemeMode == "light") ? "#fff" : "#03001C", width: { lg: "95%", md: "95%", xs: "95%", sm: "95%" }}}>
           <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", 
           width: { lg: "94%", md: "95%", xs: "95%", sm: "95%" } }}>
             <Paper
@@ -149,7 +148,7 @@ export default function Dialog() {
               </Avatar>
           </Box> 
         </Box>
-      </Box>
+      </Stack>
     </>
   )
 }

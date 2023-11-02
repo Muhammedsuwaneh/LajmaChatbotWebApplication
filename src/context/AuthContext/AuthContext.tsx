@@ -75,7 +75,6 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
         setSendingRequest(false);
         successFeedback("Logged out");
         deleteCookie(cookie_name);
-        redirect("/");
     };
 
     const forgotpasswordHandler = async (email: string) => {

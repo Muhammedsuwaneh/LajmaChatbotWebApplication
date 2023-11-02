@@ -15,7 +15,7 @@ namespace EmployeeManagementSystemAPI.Controllers
     [ApiController]
     public class ApplicationUserController : ControllerBase
     {
-        private ApplicationUserService applicationUserService;
+        private IApplicationUserService applicationUserService;
 
         public ApplicationUserController(ApplicationDbContext _context, IConfiguration _config, IMapper _mapper)
         {

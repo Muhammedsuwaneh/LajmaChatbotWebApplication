@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 export interface IResponse {
     id: string,
     query: string | null,
-    response: string | null
+    response: any
 }
 
 export interface IChat {

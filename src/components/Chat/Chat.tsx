@@ -95,7 +95,7 @@ export default function Chat() {
                     bgcolor: themeContext.appThemeMode === "light" ? "#ECE2F5" : "#301E67",
                     border: themeContext.appThemeMode === "light" ? ".5px solid #5B0888" : ".5px solid #301E67",
                     position: "fixed",
-                    top: "80vh",
+                    top: "85vh",
                     right: "1.7rem",
                     display: { lg: "none", md: "flex", sm: "flex", xs: "flex"}
                   }}
@@ -118,5 +118,3 @@ export default function Chat() {
     </Box>  
   )
 }
-
-// display: { lg: "block", md: "none", sm: "none", xs: "none"}

@@ -60,7 +60,12 @@ namespace Lajma.Backend.Services
 
                 var response = await conversation.GetResponseFromChatbotAsync();
 
-                if (response == null) throw new Exception("oops something went wrong");
+                if(response == null) throw new Exception("oops something went wrong");
+
+                string formattedText = response.Replace("\n", "<br>");
+
+                formattedText = $"<p>{formattedText}</p>";
+
 
                 var currentDateTime = DateTime.Now.ToString();
 
@@ -68,7 +73,7 @@ namespace Lajma.Backend.Services
                 {
                     Id = query.QueryId,
                     Query = query.Query,
-                    Response = response,
+                    Response = formattedText,
                     QueryDate = currentDateTime
                 };
 

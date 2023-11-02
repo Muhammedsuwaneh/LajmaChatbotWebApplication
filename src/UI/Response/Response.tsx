@@ -29,11 +29,11 @@ export default function Response() {
   const themeContext = useContext(ThemeContext);
   const [readingText, setReadingText] = useState<boolean>(false);
   const [currentSelectedResponseId, setCurrentSelectedResponseId] = useState<string>();
-  const copyToClipboardHandler = (response: string | null) => {
+  const copyToClipboardHandler = (response: any) => {
     if(response != null) queryContext.copyToClipboard(response);
   }
 
-  const responseTextToSpeechHandler = (response: string | null, id: string | null) => {
+  const responseTextToSpeechHandler = (response: any, id: string | null) => {
       if(response != null && id != null) {
         setCurrentSelectedResponseId(id);
         // read speech aloud
@@ -62,8 +62,8 @@ export default function Response() {
   }
 
   return (
-    <Box className={styles.response_list} sx={{ padding: { lg: "1rem .5rem", md: "1rem", xs: "0 1.4rem", sm: "1rem" },
-    height: { lg: '75vh', sm: '78vh', md: '', xs: '80vh'}, overflowY: 'scroll' }}>
+    <Box className={styles.response_list} sx={{ padding: { lg: "1rem", md: "1rem", xs: "0 1.4rem", sm: "1rem" }, 
+    overflowY: 'scroll', height:  { lg: "75vh", md: "79vh", xs: "83vh", sm: "83vh" }, }}>
       {queryContext.isOpen && <Toast status={queryContext.responseStatus} message={queryContext.responseMessage} />}
       {queryContext.responses.map((response: IResponse) => {
           return (
@@ -104,7 +104,7 @@ export default function Response() {
                       </Avatar>
                     </Box>
                   </Box>
-                  <Typography sx={{ paddingTop: "2rem" }}>{response.response}</Typography>
+                  <div dangerouslySetInnerHTML={{ __html: response.response }}/>
                 </Box>
               </Box>
             </motion.div>

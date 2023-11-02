@@ -84,6 +84,7 @@ const item = {
 function NavigationBar() {
   const themeContext = React.useContext(ThemeContext);
   const authContext = React.useContext(AuthContext);
+  const router = useRouter();
   const [avatar, setAvatar] = React.useState<string | undefined>("");
 
   type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -103,6 +104,7 @@ function NavigationBar() {
     const cookie_name = process.env.NEXT_PUBLIC_COOKIE_NAME;
     if(cookie_name != undefined) {
       authContext.logoutRequest(cookie_name);
+      router.push("/");
     }
   };
 
