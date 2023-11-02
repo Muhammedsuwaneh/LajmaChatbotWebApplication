@@ -112,9 +112,6 @@ export default function Dialog() {
       </Drawer>
       <Stack sx={{ display: "flex", flexDirection: "column" }}>
        {queryContext.isOpen && <Toast status={queryContext.responseStatus} message={queryContext.responseMessage} />}
-        {queryContext.sendingRequest && <Box sx={{ padding: "1rem" }}>
-          <PageLoaderSpinner width={30} height={30} /> 
-        </Box>}
         <Response />
         <Box sx={{  display: "flex", alignItems: "center", justifyContent: 'center', flexDirection: "column", 
         margin: { lg: '.5rem', sm: '0', md: '0', xs: '0'} , padding: ".5rem 1rem",
@@ -137,7 +134,9 @@ export default function Dialog() {
                     />
                     <IconButton type="button" sx={{ p: '10px', color: (themeContext.appThemeMode == "light") ? "#03001C" : "#fff" }} 
                     disabled={queryContext.sendingRequest}>
-                      <SendIcon  onClick={sendChatQueryHandler} />
+                      {queryContext.sendingRequest 
+                      && <PageLoaderSpinner width={25} height={25} /> 
+                      || <SendIcon  onClick={sendChatQueryHandler} /> }
                     </IconButton>
               </Paper>
               <Avatar sx={{ "&:hover": { opacity: '.5' }, p: '10px', cursor: "pointer", textAlign: "center",

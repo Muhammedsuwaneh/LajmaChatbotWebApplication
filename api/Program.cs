@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(corsPolicy, builder =>
     {
         builder
-            .WithOrigins("https://lajma.vercel.app")
+            .WithOrigins("http://localhost:3000")
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod();
